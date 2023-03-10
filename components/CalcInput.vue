@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 // props
 const props = defineProps({
-  modelValue: { type: String, require: true },
+  modelValue: { type: String, required: true },
   disabled: { type: Boolean, default: false },
   min: { type: Number, default: 0.1 },
   max: { type: Number, default: 999 },
@@ -12,16 +12,16 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'change'])
 
 // state
-const modelValue = useSyncProps<string>(props, 'modelValue', emit)
+const mValue = useSyncProps<string>(props, 'modelValue', emit)
 // const disabled = useSyncProps<string>(props, 'disabled', emit)
 const focused = ref(false)
 
 // input validation
 const validateInput = () => {
-  let value = parseFloat(modelValue.value) || 0
+  let value = parseFloat(mValue.value) || 0
   if (value < props.min) value = props.min
   if (value > props.max) value = props.max
-  modelValue.value = value.toString()
+  mValue.value = value.toString()
 }
 </script>
 
@@ -34,7 +34,7 @@ const validateInput = () => {
         type="text"
         ref="input-el"
         :disabled="props.disabled"
-        v-model="modelValue"
+        v-model="mValue"
         @focus="focused = true; this.$refs['input-el'].select()"
         @blur="focused = false"
         @keyup="validateInput"

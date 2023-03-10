@@ -13,7 +13,7 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'change'])
 
 // state
-const modelValue = useSyncProps<string>(props, 'modelValue', emit)
+const mValue = useSyncProps<string>(props, 'modelValue', emit)
 
 const loading = ref(false)
 const customList = ref([])
@@ -54,7 +54,7 @@ const descriptionText = (item: any) => {
     <el-select
       size="large"
       :teleported="false"
-      v-model="modelValue"
+      v-model="mValue"
       filterable
       remote
       :remote-method="searchCity"
