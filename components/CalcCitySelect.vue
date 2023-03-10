@@ -1,11 +1,12 @@
 <script lang="ts" setup>
+import { PropType } from 'vue'
 const { $api } = useNuxtApp()
 
 // props
 const props = defineProps({
   modelValue: { type: String, required: true },
   disabled: { type: Boolean, default: false },
-  list: { type: Array<Object>, requred: true },
+  list: { type: Array as PropType<any>, required: true },
 })
 
 // emits
@@ -58,7 +59,7 @@ const descriptionText = (item: any) => {
       remote
       :remote-method="searchCity"
       :loading="loading"
-      :disabled="props.disabled"
+      :disabled="disabled"
       @change="$emit('change')"
     >
       <el-option class="calc-select" v-for="item in cities" :key="item.guid" :label="item.name" :value="item.guid">
