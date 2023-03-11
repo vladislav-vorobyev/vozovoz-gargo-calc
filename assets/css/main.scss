@@ -110,6 +110,8 @@ input:focus {
     }
 
     .calc-body {
+      max-width: 640px;
+
       .calc-road,
       .calc-stats {
         display: inline-flex;
@@ -118,8 +120,7 @@ input:focus {
       }
 
       .calc-road {
-        &-from,
-        &-to {
+        &-col {
           width: calc(50% - 30px);
         }
 
@@ -270,6 +271,35 @@ input:focus {
 
     .calc-select-item-name {
       color: $focus-color;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .cargo {
+    flex-direction: column;
+    align-items: center;
+  }
+  .calc-result-block {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cargo-calc {
+    .calc-body {
+      .calc-road {
+        flex-direction: column;
+        align-items: center;
+
+        &-col {
+          width: 100%;
+        }
+
+        .calc-city-swap {
+          margin: 30px;
+        }
+      }
     }
   }
 }

@@ -79,7 +79,7 @@ onMounted(async () => {
         <div class="calc-title">Рассчитать</div>
         <div class="calc-body">
           <div class="calc-road">
-            <div class="calc-road-from">
+            <div class="calc-road-from calc-road-col">
               <ClientOnly>
                 <CalcCitySelect v-model="cityFrom" :disabled="disabled" :list="cities" @change="getPrice" />
               </ClientOnly>
@@ -93,7 +93,7 @@ onMounted(async () => {
                 ><img src="@/assets/images/swap_horiz.svg"
               /></el-button>
             </div>
-            <div class="calc-road-to">
+            <div class="calc-road-to calc-road-col">
               <ClientOnly>
                 <CalcCitySelect v-model="cityTo" :disabled="disabled" :list="cities" @change="getPrice" />
               </ClientOnly>
@@ -104,25 +104,29 @@ onMounted(async () => {
             </div>
           </div>
           <div class="calc-stats">
-            <CalcInput
-              v-model="calcWeight"
-              :disabled="disabled"
-              :min="0.1"
-              :max="19999"
-              top-label="Вес"
-              @change="getPrice"
-              >кг</CalcInput
-            >
-            <CalcInput
-              v-model="calcVolume"
-              :disabled="disabled"
-              :min="0.01"
-              :max="74"
-              top-label="Объем"
-              @change="getPrice"
-            >
-              м<sup>3</sup>
-            </CalcInput>
+            <div class="calc-road-col">
+              <CalcInput
+                v-model="calcWeight"
+                :disabled="disabled"
+                :min="0.1"
+                :max="19999"
+                top-label="Вес"
+                @change="getPrice"
+                >кг</CalcInput
+              >
+            </div>
+            <div class="calc-road-col">
+              <CalcInput
+                v-model="calcVolume"
+                :disabled="disabled"
+                :min="0.01"
+                :max="74"
+                top-label="Объем"
+                @change="getPrice"
+              >
+                м<sup>3</sup>
+              </CalcInput>
+            </div>
           </div>
         </div>
       </div>
