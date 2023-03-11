@@ -33,7 +33,7 @@ const validateInput = () => {
         class="form-input form-control"
         type="text"
         ref="input-el"
-        :disabled="props.disabled"
+        :disabled="disabled"
         v-model="mValue"
         @focus="focused = true; this.$refs['input-el'].select()"
         @blur="focused = false"
