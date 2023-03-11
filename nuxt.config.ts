@@ -37,10 +37,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     // The private keys which are only available within server-side
+    CARGO_API_URL: process.env.CARGO_API_URL,
+    CARGO_API_AUTH: process.env.CARGO_API_AUTH,
     // Keys within public, will be also exposed to the client-side
-    public: {
-      API_AUTH: process.env.API_AUTH,
-      API_URL: process.env.API_URL,
-    },
+    public: {},
   },
 })

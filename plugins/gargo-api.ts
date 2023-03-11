@@ -8,7 +8,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   // define axios
   let _axios = axios.create({
-    baseURL: config.public.API_URL,
+    baseURL: '/api/proxy',
     headers: {
       'Content-type': 'application/json',
     },

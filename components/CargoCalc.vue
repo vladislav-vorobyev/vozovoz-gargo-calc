@@ -64,6 +64,8 @@ const price = ref(0)
 const basePrice = ref(0)
 
 onMounted(async () => {
+  /* const { data } = await $api.getVersion()
+  console.log('version', data) */
   await getData()
   await getPrice()
 })
