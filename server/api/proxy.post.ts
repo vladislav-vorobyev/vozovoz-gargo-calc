@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { AxiosError } from 'axios'
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
@@ -17,8 +18,25 @@ export default defineEventHandler(async (event) => {
   // console.log('#--- request body ---\n', body)
 
   // Request to target system
-  const { data } = await _axios.post('', body)
-  // console.log('#--- response ---\n', data)
+  try {
+    const { data } = await _axios.post('', body)
+    // console.log('#--- response ---\n', data)
 
-  return data
+    return data
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      if (e.response) {
+        console.log(e.toString())
+        // console.log(e.response.data ?? e.response.headers)
+      } else {
+        console.log(e)
+      }
+      throw createError({
+        statusCode: e.response?.status ?? 500,
+        statusMessage: e.response?.statusText ?? e.toString(),
+      })
+    }
+
+    throw e
+  }
 })
