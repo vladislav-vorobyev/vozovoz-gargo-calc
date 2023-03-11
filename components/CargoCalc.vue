@@ -60,6 +60,14 @@ const calcVolume = ref('0.1')
 // state
 const disabled = ref(false)
 const cities = ref([{ guid: '-1', name: 'загрузка...' }])
+const locationFromValues = [
+  { id: 'address', name: 'От адреса' },
+  { id: 'terminal', name: 'От терминала' },
+]
+const locationToValues = [
+  { id: 'address', name: 'До адреса' },
+  { id: 'terminal', name: 'До терминала' },
+]
 const price = ref(0)
 const basePrice = ref(0)
 
@@ -83,12 +91,15 @@ onMounted(async () => {
           <div class="calc-road">
             <div class="calc-road-from calc-road-col">
               <ClientOnly>
-                <CalcCitySelect v-model="cityFrom" :disabled="disabled" :list="cities" @change="getPrice" />
+                <CalcCitySelect
+                  v-model="cityFrom"
+                  :list="cities"
+                  v-model:location="locationFrom"
+                  :location-values="locationFromValues"
+                  :disabled="disabled"
+                  @change="getPrice"
+                />
               </ClientOnly>
-              <el-radio-group v-model="locationFrom" :disabled="disabled" class="calc-location" @change="getPrice">
-                <el-radio label="address" size="large">От адреса</el-radio>
-                <el-radio label="terminal" size="large">От терминала</el-radio>
-              </el-radio-group>
             </div>
             <div class="calc-city-swap">
               <el-button text :disabled="disabled" @click="doSwap"
@@ -97,12 +108,15 @@ onMounted(async () => {
             </div>
             <div class="calc-road-to calc-road-col">
               <ClientOnly>
-                <CalcCitySelect v-model="cityTo" :disabled="disabled" :list="cities" @change="getPrice" />
+                <CalcCitySelect
+                  v-model="cityTo"
+                  :list="cities"
+                  v-model:location="locationTo"
+                  :location-values="locationToValues"
+                  :disabled="disabled"
+                  @change="getPrice"
+                />
               </ClientOnly>
-              <el-radio-group v-model="locationTo" :disabled="disabled" class="calc-location" @change="getPrice">
-                <el-radio label="address" size="large">До адреса</el-radio>
-                <el-radio label="terminal" size="large">До терминала</el-radio>
-              </el-radio-group>
             </div>
           </div>
           <div class="calc-stats">
